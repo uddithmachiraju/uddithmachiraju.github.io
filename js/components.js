@@ -45,3 +45,86 @@ window.addEventListener('scroll', () => {
   const scroll = window.pageYOffset;
   document.querySelector('nav').style.transform = `translateZ(${scroll * 0.01}px)`;
 });
+
+function toggleDetails(card) {
+  card.classList.toggle("expanded");
+}
+
+const experienceData = [
+  {
+    company: "Cohyve",
+    role: "Artificial Intelligence Intern",
+    duration: "Jun 2025 – Present",
+    details: [
+      
+    ]
+  },
+  {
+    company: "Aegion Dynamic Solutions",
+    role: "Machine Learning Intern",
+    duration: "Mar 2025 – Present",
+    details: [
+      "Built and deployed scalable ML pipelines using Flyte on AWS EC2, enabling reproducible, modular, and cloud-native workflow execution.",
+      "Focused on designing a custom top-layer interface over Flyte to simplify pipeline execution for non-technical users.",
+      "Containerized workflows using Docker and implemented CI/CD automation for seamless deployment and testing.",
+      "Developed and deployed a serverless application using AWS Lambda, and REST API Gateway integration"
+    ]
+  },
+  {
+    company: "KanaQ Innovations",
+    role: "Python Developer Intern",
+    duration: "Jan 2025 – May 2025",
+    details: [
+      "Developed custom Odoo modules for Master Data Management.",
+      "Automated customer/vendor profile management with Python.",
+      "Integrated modules with Odoo for real-time data sync.",
+      "Utilized PostgreSQL and Odoo ORM for data integrity.",
+      "Managed Odoo servers on Linux, optimized performance."
+    ]
+  },
+  {
+    company: "Indian Institute of Technology, Indore",
+    role: "ML Research Intern",
+    duration: "Aug 2024 – Mar 2025",
+    details: [
+      "Designed 7 GAN architectures, boosting adversarial malware classification efficiency by 15%.",
+      "Implemented a Dual GAN to decrease the mode collapse score and improve generated sample quality.",
+      "Enhanced dataset quality, increasing classifier robustness by 30% through synthetic malware generation.",
+      "Reduced false positives in cybersecurity detection by 20% using mimicry attack techniques.",
+      "Increased malware detection accuracy by 10% through fine-tuned Random Forest models across 36 datasets.",
+      "Utilized MLflow for model tracking and hyperparameter tuning, optimizing model performance."
+    ]
+  }
+];
+
+function openModal(index) {
+  const modal = document.getElementById("experience-modal");
+  const title = document.getElementById("modal-title");
+  const role = document.getElementById("modal-role");
+  const duration = document.getElementById("modal-duration");
+  const detailsList = document.getElementById("modal-details");
+
+  const data = experienceData[index];
+  title.textContent = data.company;
+  role.textContent = data.role;
+  duration.textContent = data.duration;
+
+  detailsList.innerHTML = "";
+  data.details.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    detailsList.appendChild(li);
+  });
+
+  modal.style.display = "block";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const closeBtn = document.querySelector(".close-modal");
+  const modal = document.getElementById("experience-modal");
+
+  closeBtn.onclick = () => (modal.style.display = "none");
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  };
+});

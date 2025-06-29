@@ -36,24 +36,20 @@
         </p>
         <a href="#about" class="btn">Explore My Work</a>
       </div>
-
-      <!-- <div class="hero-image">
-        <img src="images/avatar.png" alt="Jigar Avatar">
-      </div> -->
     </div>
   </header>
 
-    <section id="about">
+  <section id="about">
     <h2 class="section-title">About Me</h2>
     <div class="container grid-2">
       <div><img src="images/Profile.jpg" alt="Your Photo"></div>
       <div>
-      <p class="hero-bio">
-        I'm M. Sanjay Uddith Raju, an undergraduate with hands-on experience in building ML systems using Python, PyTorch, and Scikit-learn. I’ve deployed models with Docker and AWS Lambda, automated workflows using Jenkins, and tracked experiments with MLflow.
-      </p>
+        <p class="hero-bio">
+          I'm M. Sanjay Uddith Raju, an undergraduate with hands-on experience in building ML systems using Python, PyTorch, and Scikit-learn. I’ve deployed models with Docker and AWS Lambda, automated workflows using Jenkins, and tracked experiments with MLflow.
+        </p>
       </div>
     </div>
-    </section>
+  </section>
 
 
 <section id="skills">
@@ -135,17 +131,71 @@
 
   <section id="experience">
     <h2 class="section-title">Experience</h2>
-    <div class="container timeline">
-      <div class="timeline-item">
-        <h3>Software Engineer</h3>
-        <span>Company Name, 2020–2021</span>
+    <div class="experience-container">
+      <div class="experience-card" onclick="openModal(0)">
+        <img src="images/cohyve_logo.jpeg" alt="Cohyve Logo" class="company-logo">
+        <div class="experience-info">
+          <div class="left-info">
+            <h3 class="company-name">Cohyve</h3>
+            <p class="role-name">Artificial Intelligence Intern</p>
+          </div>
+          <div class="right-info"> 
+            <p class="duration">Jun 2025 – Present</p>
+          </div>
+        </div>
       </div>
-      <div class="timeline-item">
-        <h3>Lead Developer</h3>
-        <span>Company Name, 2021–Present</span>
+
+      <div class="experience-card" onclick="openModal(1)">
+        <img src="images/Aegion.png" alt="Aegion Logo" class="company-logo">
+        <div class="experience-info">
+          <div class="left-info">
+            <h3 class="company-name">Aegion Dynamic Solutions</h3>
+            <p class="role-name">Machine Learning Intern</p>
+          </div>
+          <div class="right-info">
+            <p class="duration">Mar 2025 – Present</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-card" onclick="openModal(2)">
+        <img src="images/KanaQ-Logo.png" alt="KanaQ Logo" class="company-logo">
+        <div class="experience-info">
+          <div class="left-info">
+            <h3 class="company-name">KanaQ Innovations</h3>
+            <p class="role-name">Python Developer Intern</p> 
+          </div>
+          <div class="right-info">
+            <p class="duration">Jan 2025 – May 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-card" onclick="openModal(3)">
+        <img src="images/IITI_Logo.png" alt="IITI Logo" class="company-logo">
+        <div class="experience-info">
+          <div class="left-info">
+            <h3 class="company-name">Indian Institute of Technology, Indore</h3>
+            <p class="role-name">ML Research Intern</p>
+          </div>
+          <div class="right-info">
+            <p class="duration">Aug 2024 – Mar 2025</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <div id="experience-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-title" class="modal-title"></h2>
+      <p id="modal-role" class="modal-role"></p>
+      <p id="modal-duration" class="modal-duration"></p>
+      <ul id="modal-details" class="modal-details"></ul>
+    </div>
+  </div>
+
 
   <section id="work">
     <h2 class="section-title">Work</h2>

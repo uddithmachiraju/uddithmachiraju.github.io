@@ -468,3 +468,311 @@ html {
   50% { transform: scale(1.3) rotateZ(3deg); }
   100% { transform: scale(1.2) rotateZ(0); }
 }
+
+#experience {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.experience-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.experience-card {
+  display: flex;
+  flex-direction: row; /* ← important for horizontal layout */
+  justify-content: space-between; /* ← pushes left and right parts apart */
+  align-items: center;
+  gap: 1rem; /* reduced from 1.5rem */
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem; /* reduced from 1.5rem 2rem */
+  width: 95%;
+  max-width: 500px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* subtler shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.experience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.company-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.experience-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.left-info {
+  text-align: left;
+}
+
+.right-info {
+  text-align: right;
+}
+
+.company-name {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.role-name {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.duration {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+.experience-details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.experience-card.expanded .experience-details {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.experience-details ul {
+  padding-left: 1.5rem;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  list-style-type: disc;
+}
+
+@media (max-width: 768px) {
+  .experience-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .duration {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Modal Backdrop */
+#experience-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+/* Modal Container */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Close Button */
+.close-modal {
+  color: #888;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: #38bdf8;
+}
+
+/* Modal Content Styling */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.modal-role {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  text-align: center;
+}
+
+.modal-duration {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal-details {
+  font-size: 1rem;
+  color: #333;
+}
+
+.modal-details li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#experience-modal.show {
+  display: block;
+  animation: fadeInBackdrop 0.2s ease-out forwards;
+}
+
+.modal-content {
+  transform-origin: center center;
+  animation: growFromCard 0.35s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes growFromCard {
+  0% {
+    transform: scale(0.4) translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to   { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+.timeline-container {
+  position: relative;
+  margin: 3rem auto;
+  padding-left: 2.5rem;
+  max-width: 700px;
+  border-left: 2px solid #38bdf8;
+  animation: drawLine 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes drawLine {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeSlideIn 0.6s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -13px;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px #38bdf8;
+  transform: scale(0);
+  opacity: 0;
+  animation: popDot 0.5s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes popDot {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
