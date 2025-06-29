@@ -128,3 +128,47 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target === modal) modal.style.display = "none";
   };
 });
+
+
+const overallCtx = document.getElementById('skillRadar').getContext('2d');
+  new Chart(overallCtx, {
+    type: 'radar',
+    data: {
+      labels: ['MLOps', 'Research', 'API Dev', 'Cloud Deploy', 'Optimization', 'Data Eng'],
+      datasets: [
+        {
+          label: 'Overall Experience',
+          data: [66.25, 72.5, 65, 70, 66.25, 73.75],
+          backgroundColor: 'rgba(34,197,94,0.2)',
+          borderColor: 'rgba(34,197,94,1)',
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      scales: {
+        r: {
+          beginAtZero: true,
+          angleLines: { color: '#ddd' },
+          grid: { color: '#eee' },
+          pointLabels: { color: '#444', font: { size: 12 } },
+          suggestedMin: 0,
+          suggestedMax: 100,
+          ticks: {
+            display: false
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#333',
+            font: { weight: 'bold' }
+          },
+          onClick: () => {}
+        }
+      }
+    }
+  });
+

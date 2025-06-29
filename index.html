@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div id="particles-js"></div>
@@ -129,8 +130,9 @@
   </div>
 </section>
 
-  <section id="experience">
-    <h2 class="section-title">Experience</h2>
+<section id="experience">
+  <h2 class="section-title">Experience</h2>
+  <div class="experience-wrapper">
     <div class="experience-container">
       <div class="experience-card" onclick="openModal(0)">
         <img src="images/cohyve_logo.jpeg" alt="Cohyve Logo" class="company-logo">
@@ -184,7 +186,13 @@
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- Radar chart goes here -->
+    <div class="radar-container">
+      <canvas id="skillRadar"></canvas>
+    </div>
+  </div>
+</section>
 
   <div id="experience-modal">
     <div class="modal-content">
@@ -195,7 +203,7 @@
       <ul id="modal-details" class="modal-details"></ul>
     </div>
   </div>
-
+  
 
   <section id="work">
     <h2 class="section-title">Work</h2>
