@@ -1,8 +1,39 @@
 {
   "particles": {
-    "number": {"value": 80},
-    "size": {"value": 3},
-    "move": {"speed": 2},
-    "line_linked": {"enable": true}
-  }
+    "number": {
+      "value": 80
+    },
+    "color": {
+      "value": "#555555" 
+    },
+    "shape": {
+      "type": "circle"
+    },
+    "opacity": {
+      "value": 0.6
+    },
+    "size": {
+      "value": 3
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#aaaaaa", 
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 2
+    }
+  },
+  "interactivity": {
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "grab"
+      }
+    }
+  },
+  "retina_detect": true
 }
