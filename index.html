@@ -15,13 +15,13 @@
   <nav>
     <div class="nav-container">
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#home">~root</a></li>
+        <li><a href="#about">whoami</a></li>
+        <li><a href="#skills">toolbox</a></li>
+        <li><a href="#experience">jobs</a></li>
+        <li><a href="#work">builds</a></li>
+        <li><a href="#education">education</a></li>
+        <li><a href="#contact">connect</a></li>
       </ul>
     </div>
   </nav>
@@ -203,80 +203,106 @@
       <ul id="modal-details" class="modal-details"></ul>
     </div>
   </div>
-  
 
-  <section id="work">
-    <h2 class="section-title">Projects</h2>
-    <div class="container trending-grid">
+<section class="stats-section">
+    <div class="stat-card">
+      <div class="stat-icon blue">
+        <!-- Code Swap Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+          <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="stat-number blue counter" data-target="30">0</h3>
+      <p class="stat-label">APIs Built</p>
+    </div>
 
-      <!-- Project 1 -->
-      <a href="https://github.com/yourusername/http-modifier" target="_blank" rel="noopener noreferrer" class="trending-card-link">
-        <div class="trending-card">
-          <!-- Full image at top -->
-          <img src="images/Logo-with-Robot.png" class="project-thumb" alt="HTTP Project Thumbnail">
-          
-          <div class="trending-text">
-            <!-- 🔷 Title -->
-            <h3 class="project-title">AutoAPI</h3>
-            
-            <!-- 🔸 Description -->
-            <h4 class="project-desc">No more boring and hardcoding of API for your model/application.</h4>
-            
-            <!-- 🔹 Tags -->
-            <div class="tag-row">
-              <img class="tag-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-              <img class="tag-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask">
-              <img class="tag-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
-            </div>
-          </div>
-        </div>
-      </a>
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <!-- Cloud Upload -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 16l-4-4-4 4" />
+          <path d="M12 12v9" />
+          <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 16.25" />
+        </svg>
+      </div>
+      <h3 class="stat-number green counter" data-target="2">0</h3>
+      <p class="stat-label">Apps Deployed</p>
+    </div>
 
-      <!-- Project 2 -->
-      <a href="https://github.com/yourusername/http-modifier" target="_blank" rel="noopener noreferrer" class="trending-card-link">
-        <div class="trending-card">
-          <!-- Full image at top -->
-          <img src="images/Logo.png" class="project-thumb" alt="HTTP Project Thumbnail">
-          
-          <div class="trending-text">
-            <!-- 🔷 Title -->
-            <h3 class="project-title">AWS Image Processor</h3>
-            
-            <!-- 🔸 Description -->
-            <h4 class="project-desc">Serverless Image Processing and Notification System Using AWS Lambda & SNS</h4>
-            
-            <!-- 🔹 Tags -->
-            <div class="tag-row">
-              
-            </div>
-          </div>
-        </div>
-      </a>
+    <div class="stat-card">
+      <div class="stat-icon orange">
+        <!-- Hourglass -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 22h14" />
+          <path d="M5 2h14" />
+          <path d="M17 2a7 7 0 0 1-7 7 7 7 0 0 1 7 7" />
+          <path d="M5 2a7 7 0 0 0 7 7 7 7 0 0 0-7 7" />
+        </svg>
+      </div>
+      <h3 class="stat-number orange counter" data-target="1">0</h3>
+      <p class="stat-label">Year Experience</p>
+    </div>
 
-      <!-- Project 3 -->
-      <a href="https://github.com/yourusername/http-modifier" target="_blank" rel="noopener noreferrer" class="trending-card-link">
-        <div class="trending-card">
-          <!-- Full image at top -->
-          <img src="images/Logo.png" class="project-thumb" alt="HTTP Project Thumbnail">
-          
-          <div class="trending-text">
-            <!-- 🔷 Title -->
-            <h3 class="project-title">AWS Flask Pipeline</h3>
-            
-            <!-- 🔸 Description -->
-            <h4 class="project-desc">Deploying a Python Flask application on AWS using EC2, VPC, and Terraform.</h4>
-            
-            <!-- 🔹 Tags -->
-            <div class="tag-row">
-              
-            </div>
-          </div>
-        </div>
-      </a>
-
+    <div class="stat-card">
+      <div class="stat-icon purple">
+        <!-- Check Circle -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      </div>
+      <h3 class="stat-number purple counter" data-target="10">0</h3>
+      <p class="stat-label">Projects Completed</p>
     </div>
   </section>
 
+  <section class="projects-section">
+  <h2 class="section-title">🧠 Projects</h2>
+  <div class="container">
+  <div class="project-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <img src="images/zyro.png" alt="Zyro Screenshot" class="project-img" />
+      <div class="project-content">
+        <h3>Zyro</h3>
+        <p>Zero-config YAML → API orchestrator using FastAPI and Docker.</p>
+        <div class="tags">
+          <span>FastAPI</span><span>Docker</span><span>Python</span>
+        </div>
+        <a href="https://github.com/uddithmachiraju/zyro" class="btn">GitHub →</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <img src="images/AWSIPP.png" alt="AWSIPP Screenshot" class="project-img" />
+      <div class="project-content">
+        <h3>AWS Image Processor</h3>
+        <p>Serverless image pipeline using Lambda, SNS, and S3.</p>
+        <div class="tags">
+          <span>AWS</span><span>Lambda</span><span>S3</span><span>SNS</span>
+        </div>
+        <a href="https://github.com/uddithmachiraju/AWS-Serverless-Image-Processing-Pipeline" class="btn">GitHub →</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <img src="images/Logo.png" alt="Flask AWS Screenshot" class="project-img" />
+      <div class="project-content">
+        <h3>Flask AWS Deployment</h3>
+        <p>Terraform-deployed Flask app with secure cloud infra.</p>
+        <div class="tags">
+          <span>Flask</span><span>AWS</span><span>Terraform</span>
+        </div>
+        <a href="https://github.com/yourusername/aws-flask" class="btn">GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
 
   <section id="education">
     <h2 class="section-title">Education</h2>

@@ -171,3 +171,33 @@ const overallCtx = document.getElementById('skillRadar').getContext('2d');
       }
     }
   });
+
+  const counters = document.querySelectorAll('.counter');
+
+const animateCounter = (el) => {
+  const target = +el.getAttribute('data-target');
+  const increment = target / 200;
+
+  const update = () => {
+    const value = +el.innerText;
+    if (value < target) {
+      el.innerText = Math.ceil(value + increment);
+      requestAnimationFrame(update);
+    } else {
+      el.innerText = target;
+    }
+  };
+
+  update();
+};
+
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => observer.observe(counter));
