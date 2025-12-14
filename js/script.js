@@ -164,29 +164,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     // animate experience (1.2 years)
                     animateCounter(entry.target, 1.2, 1, 'yrs');
                 } else if (entry.target.classList.contains('metric-number')) {
-                    const text = entry.target.textContent;
-                    let targetValue, suffix;
-                    
-                    if (text.includes('40')) {
-                        targetValue = 40;
-                        suffix = '%';
-                    } else if (text.includes('99')) {
-                        targetValue = 99;
-                        suffix = '%';
-                    } else if (text.includes('85')) {
-                        targetValue = 85;
-                        suffix = '%';
-                    } else if (text.includes('2')) {
-                        targetValue = 2;
-                        suffix = '×';
-                    } else if (text.includes('70')) {
-                        targetValue = 70;
-                        suffix = '%';
-                    } else if (text.includes('50')) {
-                        targetValue = 50;
-                        suffix = '+';
+                    // Prefer explicit `data-value` attribute; fall back to parsing numbers from text
+                    const dataVal = entry.target.getAttribute('data-value');
+                    let targetValue = 0;
+                    if (dataVal !== null && dataVal !== undefined && dataVal !== '') {
+                        targetValue = parseInt(dataVal.replace(/[^0-9]/g, ''), 10) || 0;
+                    } else {
+                        targetValue = parseInt(entry.target.textContent.replace(/[^0-9]/g, ''), 10) || 0;
                     }
-                    
+
+                    // infer suffix from visible text
+                    const text = entry.target.textContent || '';
+                    let suffix = '+';
+                    if (text.includes('%')) suffix = '%';
+                    else if (text.includes('×')) suffix = '×';
+                    else if (text.includes('+')) suffix = '+';
+
                     animateCounter(entry.target, targetValue, 0, suffix);
                 }
             }
@@ -217,5 +210,161 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         setTimeout(typeWriter, 500);
+    }
+
+    // --- Experience radar chart + skill-bar animation (if elements exist) ---
+    try {
+        // Radar Chart (updated to use gradient and tooltip styling per user's design)
+        const radarCanvas = document.getElementById('radarChart');
+        if (radarCanvas && typeof Chart !== 'undefined') {
+            const radarCtx = radarCanvas.getContext('2d');
+            // ensure canvas has some height in case CSS hasn't applied yet
+            radarCanvas.parentElement.style.minHeight = radarCanvas.parentElement.style.minHeight || '260px';
+
+            const gradient = radarCtx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
+            gradient.addColorStop(1, 'rgba(139, 92, 246, 0.2)');
+
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['LLMs', 'MLOps', 'Backend', 'Cloud', 'Gen AI', 'Data Eng'],
+                    datasets: [{
+                        label: 'Skill Level',
+                        data: [95, 88, 92, 85, 90, 82],
+                        backgroundColor: gradient,
+                        borderColor: '#6366f1',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#6366f1',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#6366f1',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#6366f1',
+                            borderWidth: 1,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) { return context.parsed.r + '%'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0,
+                            ticks: {
+                                stepSize: 20,
+                                color: 'rgba(255, 255, 255, 0.6)',
+                                backdropColor: 'transparent',
+                                font: { size: 11 }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.15)', circular: true },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.15)' },
+                            pointLabels: { color: '#fff', font: { size: 13, weight: '600' }, padding: 10 }
+                        }
+                    },
+                    animation: { duration: 2000, easing: 'easeOutQuart' }
+                }
+            });
+        }
+
+        // Animate skill bars (if present)
+        const skillFills = document.querySelectorAll('.skill-fill');
+        if (skillFills.length) {
+            skillFills.forEach((fill, index) => {
+                const width = fill.style.width || '0%';
+                fill.style.width = '0%';
+                setTimeout(() => { fill.style.width = width; }, 120 * (index + 1));
+            });
+        }
+
+        // API counter: persist and increment on each page load using localStorage
+        const apiCountEl = document.getElementById('apiCount');
+        if (apiCountEl) {
+            try {
+                const key = 'apiCount';
+                let current = parseInt(localStorage.getItem(key) || '20', 10);
+                if (isNaN(current)) current = 20;
+                // increment on each load
+                current = current + 1;
+                localStorage.setItem(key, String(current));
+                // update DOM (show plus sign separately)
+                apiCountEl.innerHTML = current + '<span class="plus">+</span>';
+            } catch (e) {
+                // ignore storage errors
+                console.warn('apiCount storage error', e.message);
+            }
+        }
+        
+        // Animate the new metric cards (data-target attr expected)
+        const animateLargeMetric = (el, duration = 1200) => {
+            const target = parseInt(el.getAttribute('data-target') || el.textContent.replace(/[^0-9]/g, ''), 10) || 0;
+            const start = 0;
+            const startTime = performance.now();
+
+            const step = (now) => {
+                const progress = Math.min((now - startTime) / duration, 1);
+                const current = Math.floor(progress * (target - start) + start);
+
+                // format large numbers (k)
+                if (target >= 1000) {
+                    const k = Math.floor(current / 1000);
+                    el.textContent = k + 'K+';
+                } else {
+                    el.textContent = current + (el.querySelector('.plus') ? '+' : '');
+                }
+
+                if (progress < 1) requestAnimationFrame(step);
+            };
+
+            requestAnimationFrame(step);
+        };
+
+        // Start animations for all metric-number-large when visible
+        const largeMetrics = document.querySelectorAll('.metric-number-large');
+        largeMetrics.forEach((m) => {
+            // run immediately (they're visible in the card)
+            animateLargeMetric(m, 1400);
+        });
+
+        // Project Impact Heatmap generation
+        const heatmapEl = document.getElementById('heatmap');
+        if (heatmapEl) {
+            // create a deterministic-ish dataset for 12 months x 7 rows
+            const months = 12;
+            const rows = 7; // days of week visual layout
+
+            // clear
+            heatmapEl.innerHTML = '';
+
+            for (let r = 0; r < rows; r++) {
+                for (let m = 0; m < months; m++) {
+                    const cell = document.createElement('div');
+                    // simple value generator (can be replaced with real data)
+                    const value = Math.floor((Math.abs(Math.sin((m + 1) * (r + 2))) * 100) % 5);
+                    cell.className = 'cell level-' + value;
+                    cell.setAttribute('title', `Month ${m + 1} — intensity ${value}`);
+                    heatmapEl.appendChild(cell);
+                }
+            }
+        }
+    } catch (e) {
+        // Quietly ignore if Chart.js isn't loaded or canvas not present
+        console.warn('Experience radar init skipped:', e.message);
     }
 });

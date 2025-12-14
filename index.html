@@ -45,9 +45,9 @@
                                 <div>
                                     <div class="Chatbot">Know me via my chatbot</div>
                                     <div class="chatbot-text">Not implemented</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         <div class="stat-card experience-card">
                             <div class="experience-left">
@@ -139,6 +139,130 @@
             </div>
         </div>
     </div>
+
+    
+
+    <!-- Chart.js (required for Experience charts) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+    <!-- Experience Section (updated per user) -->
+    <section id="experience" class="experience-container" aria-label="Experience">
+        <div class="card">
+            <div class="mission-badge">PROFESSIONAL JOURNEY</div>
+
+            <div class="content-wrapper">
+                <!-- Left Section: Experience Cards -->
+                <div class="left-section">
+                    <h1 class="main-heading">
+                        <span class="heading-name">Work Experience</span>
+                        <span class="heading-light">Building AI solutions across diverse domains</span>
+                    </h1>
+
+                    <div class="stats-grid">
+                        <div class="stat-card company-card">
+                            <img src="assets/Acutus.jpeg" alt="Acutus AI" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">Acutus AI</div>
+                                <div class="company-role">Generative AI Engineer</div>
+                                <div class="company-duration">Aug 2024 - Present · 5 mos</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card company-card">
+                            <img src="assets/cohyve_logo.jpeg" alt="Cohyve" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">Cohyve</div>
+                                <div class="company-role">Gen AI Intern</div>
+                                <div class="company-duration">Jun 2024 - Aug 2024 · 3 mos</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card company-card">
+                            <img src="assets/Aegion.png" alt="Aegion" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">Aegion</div>
+                                <div class="company-role">AI Engineer Intern</div>
+                                <div class="company-duration">Jan 2024 - May 2024 · 5 mos</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card company-card">
+                            <img src="assets/KanaQ-Logo.png" alt="KanaQ" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">KanaQ</div>
+                                <div class="company-role">ML Intern</div>
+                                <div class="company-duration">Sep 2023 - Dec 2023 · 4 mos</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card company-card">
+                            <img src="assets/IITI_Logo.png" alt="IIT Indore" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">IIT Indore</div>
+                                <div class="company-role">Research Intern</div>
+                                <div class="company-duration">May 2023 - Aug 2023 · 4 mos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: KPI Metrics + Radar Chart -->
+                <div class="right-section">
+                    <!-- <p class="promise-text">Demonstrated expertise across multiple roles, delivering impactful AI solutions and technical innovations.</p> -->
+
+                    <div class="info-cards">
+                        <!-- KPI Metrics Card (Light) -->
+                        <div class="info-card light-card">
+                            <div class="impact-text">Key technical achievements and contributions</div>
+                            <div class="metrics-wrapper">
+                                <div class="metric-item">
+                                    <div class="metric-number" data-value="50">50<span class="plus">K+</span></div>
+                                    <div class="metric-label">Lines of Code</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-number" data-value="20">20<span class="plus">+</span></div>
+                                    <div class="metric-label">APIs Designed</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-number" data-value="25">25<span class="plus">+</span></div>
+                                    <div class="metric-label">Models Trained</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-number" data-value="2">2<span class="plus">+</span></div>
+                                    <div class="metric-label">Cloud Deployments</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-number" data-value="500">500<span class="plus">+</span></div>
+                                    <div class="metric-label">GitHub Commits</div>
+                                </div>
+                                <!-- Documentation Pages metric removed per request -->
+                            </div>
+                            <div class="availability">
+                                <span class="availability-dot"></span>
+                                <span class="availability-text">ACTIVELY BUILDING</span>
+                            </div>
+                        </div>
+
+                        <!-- Radar Chart Card (Dark) -->
+                        <div class="info-card dark-card">
+                            <div class="projects-text">Technical skills distribution across AI/ML domains</div>
+                            <div class="radar-section">
+                                <div class="radar-container">
+                                    <canvas id="radarChart"></canvas>
+                                </div>
+                                <div class="radar-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-dot" style="background: #6366f1;"></span>
+                                        <span>Current Expertise</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="js/script.js"></script>
 </body>
