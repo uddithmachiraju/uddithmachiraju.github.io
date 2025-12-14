@@ -167,6 +167,45 @@ body {
     padding: 28px 32px;
 }
 
+/* Layout for experience card: left (logos) and right (years) */
+.experience-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.experience-left {
+    flex: 1 1 65%;
+}
+
+.experience-right {
+    flex: 0 0 28%;
+    text-align: right;
+}
+
+.experience-number {
+    font-size: 45px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1;
+}
+
+.experience-unit {
+    font-size: 22px;
+    font-weight: 700;
+    color: #666;
+    margin-left: 6px;
+}
+
+.experience-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    margin-top: 6px;
+}
+
 .companies-info {
     margin-bottom: 16px;
 }
@@ -209,6 +248,16 @@ body {
     font-size: 13px;
     font-weight: 600;
     color: #333;
+}
+
+/* Logo images for companies in the experience card */
+.company-logo-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: transparent;
+    display: inline-block;
 }
 
 .companies-text {
@@ -522,5 +571,20 @@ body {
 
     .company-logos {
         flex-direction: column;
+    }
+
+    .experience-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .experience-right {
+        text-align: left;
+        width: 100%;
+    }
+
+    .experience-number {
+        font-size: 44px;
     }
 }

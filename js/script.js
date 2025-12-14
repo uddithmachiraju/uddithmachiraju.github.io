@@ -140,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     element.innerHTML = Math.floor(current) + '<span class="plus">%</span>';
                 }
+            } else if (element.classList.contains('experience-number')) {
+                // show experience with decimals and unit (e.g. 1.5yrs)
+                element.innerHTML = current.toFixed(decimals) + '<span class="experience-unit">' + suffix + '</span>';
             }
         }, 16);
     };
@@ -157,6 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (entry.target.classList.contains('stat-number')) {
                     animateCounter(entry.target, 8.0, 1, '%');
+                } else if (entry.target.classList.contains('experience-number')) {
+                    // animate experience (1.5 years)
+                    animateCounter(entry.target, 1.5, 1, 'yrs');
                 } else if (entry.target.classList.contains('metric-number')) {
                     const text = entry.target.textContent;
                     let targetValue, suffix;
@@ -189,9 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const statNumber = document.querySelector('.stat-number');
     const metricNumbers = document.querySelectorAll('.metric-number');
+    const experienceNumber = document.querySelector('.experience-number');
     
     if (statNumber) observer.observe(statNumber);
     metricNumbers.forEach(metric => observer.observe(metric));
+    if (experienceNumber) observer.observe(experienceNumber);
 
     // Typing effect for mission badge (optional enhancement)
     const missionBadge = document.querySelector('.mission-badge');
