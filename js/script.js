@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('stat-number')) {
                     animateCounter(entry.target, 8.0, 1, '%');
                 } else if (entry.target.classList.contains('experience-number')) {
-                    // animate experience (1.5 years)
-                    animateCounter(entry.target, 1.5, 1, 'yrs');
+                    // animate experience (1.2 years)
+                    animateCounter(entry.target, 1.2, 1, 'yrs');
                 } else if (entry.target.classList.contains('metric-number')) {
                     const text = entry.target.textContent;
                     let targetValue, suffix;
