@@ -1011,3 +1011,17 @@ body {
     .experience-container .company-logo { width:54px; height:54px }
     .experience-container .metric-number { font-size:36px }
 }
+
+/* Prevent anchor content from being hidden behind fixed navbar */
+html { scroll-padding-top: 90px; }
+
+/* Mobile-specific experience tweaks */
+@media (max-width: 420px) {
+    .experience-container { padding: 20px 12px; }
+    .experience-container .card { padding: 0; }
+    .experience-container .stats-grid { gap: 12px }
+    .experience-container .company-card { padding: 16px 12px; gap: 12px }
+    .experience-container .company-logo { width:48px; height:48px }
+    .experience-container .info-cards { gap: 16px }
+    .experience-container .radar-container { height: 220px }
+}

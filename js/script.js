@@ -25,20 +25,148 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links (handles in-page anchors and accounts for fixed navbar)
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            // if it's an external link (starts with http) or a full page, allow default
+            if (!href || href.startsWith('http') || href.indexOf('#') === -1) return;
+
             e.preventDefault();
-            const targetId = link.getAttribute('href');
-            
+            // close mobile menu
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+
+            const targetId = href;
             if (targetId === '#home') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                const navbar = document.querySelector('.navbar');
+                const navHeight = navbar ? navbar.offsetHeight : 0;
+                const rect = targetEl.getBoundingClientRect();
+                const scrollTop = window.scrollY + rect.top - navHeight - 12; // small offset
+                // set active class immediately for visual feedback
+                navLinks.forEach(n => n.classList.remove('active'));
+                link.classList.add('active');
+                window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+            } else {
+                // fallback: go to href (might be a page)
+                window.location.href = href;
             }
         });
     });
+
+    // Scrollspy: compute section offsets and update active nav link reliably
+    const computeSections = () => {
+        const list = [];
+        navLinks.forEach(lnk => {
+            const href = lnk.getAttribute('href');
+            if (!href || href.indexOf('#') === -1) return;
+            const id = href.split('#')[1];
+            if (id === 'home') {
+                // home maps to top of the document
+                list.push({ link: lnk, id, top: 0 });
+            } else {
+                const el = document.getElementById(id);
+                if (el) {
+                    const top = el.getBoundingClientRect().top + window.scrollY;
+                    list.push({ link: lnk, id, el, top });
+                }
+            }
+        });
+        // sort by top offset
+        list.sort((a, b) => (a.top || 0) - (b.top || 0));
+        return list;
+    };
+
+    let sectionList = computeSections();
+
+    const updateSectionPositions = () => {
+        sectionList = computeSections();
+    };
+
+    const updateActiveOnScroll = () => {
+        const navbar = document.querySelector('.navbar');
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const scrollPos = window.scrollY + navHeight + 24; // threshold
+
+        // If we're near the top, activate Home; otherwise choose the last section whose top <= scrollPos
+        const nearTopThreshold = navHeight + 40;
+        if (window.scrollY <= nearTopThreshold) {
+            // set home active (if present)
+            navLinks.forEach(n => n.classList.remove('active'));
+            const homeLink = Array.from(navLinks).find(l => l.getAttribute('href') === '#home');
+            if (homeLink) homeLink.classList.add('active');
+            return;
+        }
+
+        // exclude 'home' from selection when scrolled down
+        let current = null;
+        for (const item of sectionList) {
+            if (item.id === 'home') continue;
+            if ((item.top || 0) <= scrollPos) current = item;
+        }
+
+        if (current) {
+            if (!current.link.classList.contains('active')) {
+                navLinks.forEach(n => n.classList.remove('active'));
+                current.link.classList.add('active');
+            }
+        }
+    };
+
+    // update positions on resize (sections may move)
+    window.addEventListener('resize', () => {
+        // recompute after layout stabilizes
+        setTimeout(updateSectionPositions, 120);
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateActiveOnScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    // run once on load
+    updateSectionPositions();
+    updateActiveOnScroll();
+
+    // Better scrollspy using IntersectionObserver (fallbacks to scroll-based method above)
+    try {
+        const navbar = document.querySelector('.navbar');
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const ioOptions = {
+            root: null,
+            rootMargin: `-${Math.round(window.innerHeight/3)}px 0px -${Math.round(window.innerHeight/3)}px 0px`,
+            threshold: 0.0
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.target || !entry.target.id) return;
+                const id = entry.target.id;
+                const matchingLink = Array.from(navLinks).find(l => l.getAttribute('href') === `#${id}`);
+                if (entry.isIntersecting && matchingLink) {
+                    navLinks.forEach(n => n.classList.remove('active'));
+                    matchingLink.classList.add('active');
+                }
+            });
+        }, ioOptions);
+
+        // observe visible sections (those referenced by nav)
+        sectionList.forEach(item => { if (item.el) io.observe(item.el); });
+    } catch (e) {
+        // ignore observer failures
+        console.warn('scrollspy observer init failed', e.message);
+    }
 
     // Navbar background on scroll
     const navbar = document.querySelector('.navbar');
@@ -133,12 +261,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (element.classList.contains('stat-number')) {
                 element.innerHTML = current.toFixed(decimals) + '<span class="stat-unit">/10</span>';
             } else if (element.classList.contains('metric-number')) {
-                if (suffix === '×') {
-                    element.innerHTML = Math.floor(current) + '<span class="plus">×</span>';
-                } else if (suffix === '+') {
-                    element.innerHTML = Math.floor(current) + '<span class="plus">+</span>';
+                // support scaled display (e.g., thousands 'K') via data-scale attribute
+                const scale = (element.getAttribute('data-scale') || '').toLowerCase();
+                const base = Math.floor(current);
+                if (scale === 'k') {
+                    // show like '50K+'
+                    element.innerHTML = base + 'K' + '<span class="plus">' + (suffix || '+') + '</span>';
                 } else {
-                    element.innerHTML = Math.floor(current) + '<span class="plus">%</span>';
+                    if (suffix === '×') {
+                        element.innerHTML = base + '<span class="plus">×</span>';
+                    } else if (suffix === '+') {
+                        element.innerHTML = base + '<span class="plus">+</span>';
+                    } else {
+                        element.innerHTML = base + '<span class="plus">%</span>';
+                    }
                 }
             } else if (element.classList.contains('experience-number')) {
                 // show experience with decimals and unit (e.g. 1.5yrs)
