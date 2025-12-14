@@ -255,31 +255,39 @@ body {
 
 .metrics-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 20px;
+    margin-bottom: 24px;
+    /* No internal scrolling — six items will form two rows (3 columns) */
+    padding-right: 0;
 }
 
 .metric-item {
     text-align: center;
+    padding: 0; /* remove box padding so metrics sit flush */
+    background: transparent; /* no box background */
+    border-radius: 0;
+    box-shadow: none; /* remove shadow */
 }
 
 .metric-number {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 800;
     color: #1a1a1a;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .plus {
-    font-size: 32px;
-    color: #999;
+    font-size: 22px;
+    color: #666;
 }
 
 .metric-label {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
+    font-weight: 600;
 }
 
 .availability {

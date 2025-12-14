@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Counter animation for CGPA
-    const animateCounter = (element, target, decimals = 0, duration = 2000) => {
+    // Counter animation for CGPA and metrics
+    const animateCounter = (element, target, decimals = 0, suffix = '%', duration = 2000) => {
         const start = 0;
         const increment = target / (duration / 16);
         let current = start;
@@ -133,7 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (element.classList.contains('stat-number')) {
                 element.innerHTML = current.toFixed(decimals) + '<span class="stat-unit">/10</span>';
             } else if (element.classList.contains('metric-number')) {
-                element.innerHTML = Math.floor(current) + '<span class="plus">%</span>';
+                if (suffix === '×') {
+                    element.innerHTML = Math.floor(current) + '<span class="plus">×</span>';
+                } else if (suffix === '+') {
+                    element.innerHTML = Math.floor(current) + '<span class="plus">+</span>';
+                } else {
+                    element.innerHTML = Math.floor(current) + '<span class="plus">%</span>';
+                }
             }
         }, 16);
     };
@@ -150,10 +156,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.classList.add('animated');
                 
                 if (entry.target.classList.contains('stat-number')) {
-                    animateCounter(entry.target, 8.0, 1);
+                    animateCounter(entry.target, 8.0, 1, '%');
                 } else if (entry.target.classList.contains('metric-number')) {
-                    const targetValue = entry.target.textContent.includes('40') ? 40 : 99;
-                    animateCounter(entry.target, targetValue, 0);
+                    const text = entry.target.textContent;
+                    let targetValue, suffix;
+                    
+                    if (text.includes('40')) {
+                        targetValue = 40;
+                        suffix = '%';
+                    } else if (text.includes('99')) {
+                        targetValue = 99;
+                        suffix = '%';
+                    } else if (text.includes('85')) {
+                        targetValue = 85;
+                        suffix = '%';
+                    } else if (text.includes('2')) {
+                        targetValue = 2;
+                        suffix = '×';
+                    } else if (text.includes('70')) {
+                        targetValue = 70;
+                        suffix = '%';
+                    } else if (text.includes('50')) {
+                        targetValue = 50;
+                        suffix = '+';
+                    }
+                    
+                    animateCounter(entry.target, targetValue, 0, suffix);
                 }
             }
         });
