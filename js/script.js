@@ -539,4 +539,170 @@ document.addEventListener('DOMContentLoaded', () => {
         // Quietly ignore if Chart.js isn't loaded or canvas not present
         console.warn('Experience radar init skipped:', e.message);
     }
+    // --- Experience Detail modal data & handlers ---
+    const experienceDetailData = {
+        'acutus': {
+            companyName: 'Acutus AI',
+            role: 'Generative AI Engineer',
+            logo: 'assets/Acutus.jpeg',
+            duration: 'Sep 2025 - Dec 2025 (3 months)',
+            location: 'Remote',
+            metrics: { metric1: '8+', metric2: '99%', metric3: '40%', metric4: '5+' },
+            metricsLabels: ['Projects', 'Accuracy', 'Improvement', 'APIs Built'],
+            techTags: ['LangChain', 'OpenAI', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS'],
+            radarData: { labels: ['LLMs','Backend','Cloud','MLOps','APIs','Gen AI'], values: [95,90,85,80,92,95] },
+            description: 'As a Generative AI Engineer at Acutus AI, I spearheaded the development of cutting-edge AI solutions focusing on document processing, multi-agent systems, and intelligent automation. My work centered on creating scalable, production-ready systems that significantly enhanced operational efficiency and accuracy.',
+            responsibilities: [
+                'Developed a multi-agent RAG chatbot using LangChain and OpenAI, achieving 95% query accuracy with advanced retrieval mechanisms',
+                'Built a comprehensive document processing system with 99% OCR precision using Tesseract, handling 500+ documents weekly',
+                'Designed and implemented FastAPI microservices with PostgreSQL, reducing response time by 40%',
+                'Architected scalable AI pipelines using Docker and AWS, ensuring 99.9% uptime',
+                'Collaborated with cross-functional teams to integrate AI solutions into existing workflows'
+            ],
+            achievements: [
+                'Improved customer targeting by 40% through advanced NLP and semantic analysis',
+                'Reduced manual data entry by 85% with automated document processing pipeline',
+                'Successfully deployed 5+ production-grade APIs serving 1000+ requests daily'
+            ]
+        },
+        'cohyve': {
+            companyName: 'Cohyve', role: 'Artificial Intelligence Intern', logo: 'assets/cohyve_logo.jpeg', duration: 'Jun 2025 - Sep 2025 (3 months)', location: 'Remote',
+            metrics: { metric1: '5+', metric2: '95%', metric3: '70%', metric4: '10+' },
+            metricsLabels: ['Models','Accuracy','Time Saved','Features'],
+            techTags: ['Python','TensorFlow','Gemini','Streamlit','Git','Pandas'],
+            radarData:{ labels:['ML','Python','Data Eng','Gen AI','Frontend','Research'], values:[85,90,75,88,70,80] },
+            description: 'During my internship at Cohyve, I focused on developing AI-powered solutions for content generation and data analysis. I worked extensively with generative models and built user-facing applications that streamlined creative workflows.',
+            responsibilities:[ 'Developed an AI content generation system using Gemini API, reducing drafting time by 70%', 'Built interactive Streamlit applications for real-time AI model demonstrations', 'Implemented data preprocessing pipelines for training custom models', 'Conducted research on prompt engineering techniques to optimize model outputs', 'Created comprehensive documentation for AI systems and APIs' ],
+            achievements:[ 'Reduced content creation time by 70% with AI-powered drafting tools', 'Built 5+ production-ready ML models with 95% average accuracy', 'Developed 10+ reusable features for the AI platform' ]
+        },
+        'aegion': {
+            companyName: 'Aegion Dynamic Solutions', role: 'Machine Learning Intern', logo: 'assets/Aegion.png', duration: 'Mar 2025 - Sep 2025 (7 months)', location: 'Hybrid',
+            metrics: { metric1: '15+', metric2: '92%', metric3: '2×', metric4: '8+' },
+            metricsLabels: ['Models','Accuracy','Speed Up','Pipelines'],
+            techTags: ['Scikit-learn','PyTorch','MLflow','Apache Airflow','AWS','SQL'],
+            radarData:{ labels:['ML','MLOps','Cloud','Data Eng','Backend','Analysis'], values:[90,85,82,88,80,85] },
+            description: 'At Aegion Dynamic Solutions, I specialized in building end-to-end machine learning pipelines and MLOps infrastructure. My work focused on creating robust, scalable systems for model training, deployment, and monitoring.',
+            responsibilities:[ 'Designed and implemented 8+ automated ML pipelines using MLflow and Apache Airflow', 'Developed predictive models achieving 92% accuracy for business forecasting', 'Built comprehensive data engineering workflows for ETL processes', 'Optimized model inference speed by 2× through efficient architecture design', 'Implemented monitoring and alerting systems for production ML models' ],
+            achievements:[ 'Accelerated data analysis by 2× with optimized processing pipelines', 'Trained and deployed 15+ models across different business domains', 'Established MLOps best practices adopted across the organization' ]
+        },
+        'kanaq': {
+            companyName: 'KanaQ Innovations', role: 'Python Developer Intern', logo: 'assets/KanaQ-Logo.png', duration: 'Jan 2025 - May 2025 (5 months)', location: 'Remote',
+            metrics:{ metric1:'20+', metric2:'100+', metric3:'12+', metric4:'500+' },
+            metricsLabels:['Scripts','Functions','APIs','Commits'], techTags:['Python','Flask','Django','MongoDB','Redis','Git'],
+            radarData:{ labels:['Python','Backend','Database','APIs','Testing','Automation'], values:[95,88,85,90,82,87] },
+            description:'As a Python Developer Intern at KanaQ Innovations, I focused on building robust backend systems and automation tools. I developed scalable APIs and worked on optimizing database operations for high-performance applications.',
+            responsibilities:[ 'Developed 12+ RESTful APIs using Flask and Django frameworks', 'Built automation scripts reducing manual operations by 60%', 'Implemented database optimization strategies improving query performance by 50%', 'Created comprehensive unit tests achieving 90% code coverage', 'Collaborated on code reviews and maintained best coding practices' ],
+            achievements:[ 'Wrote 500+ commits contributing to core product features', 'Developed 20+ reusable Python scripts for automation', 'Built 100+ functions with comprehensive documentation' ]
+        },
+        'iit': {
+            companyName: 'IIT Indore', role: 'ML Research Intern', logo: 'assets/IITI_Logo.png', duration: 'Aug 2024 - Mar 2025 (8 months)', location: 'Indore, India',
+            metrics:{ metric1:'3+', metric2:'94%', metric3:'1000+', metric4:'5+' },
+            metricsLabels:['Papers','Model Acc','Experiments','Models'], techTags:['PyTorch','TensorFlow','Jupyter','NumPy','Pandas','Matplotlib'],
+            radarData:{ labels:['Research','Deep Learning','Python','Analysis','Math','Writing'], values:[92,90,95,88,85,80] },
+            description:'During my research internship at IIT Indore, I worked on advanced machine learning research projects focusing on deep learning architectures and optimization techniques. I contributed to cutting-edge research in computer vision and natural language processing.',
+            responsibilities:[ 'Conducted research on novel deep learning architectures for computer vision tasks', 'Performed 1000+ experiments to optimize model hyperparameters and architectures', 'Developed custom PyTorch models achieving 94% accuracy on benchmark datasets', 'Analyzed and visualized complex datasets to derive meaningful insights', 'Contributed to research papers on machine learning methodologies' ],
+            achievements:[ 'Co-authored 3+ research papers on machine learning techniques', 'Achieved 94% accuracy on challenging benchmark datasets', 'Developed 5+ novel model architectures for specific research problems' ]
+        }
+    };
+
+    // expose detail data for other pages (detail page will use this)
+    try { window.experienceDetailData = experienceDetailData; } catch (e) { /* ignore */ }
+
+    const detailModal = document.getElementById('experienceDetailModal');
+    let detailRadarChart = null;
+
+    const renderDetailRadar = (labels, values) => {
+        const canvas = document.getElementById('detailTechRadar');
+        if (!canvas || typeof Chart === 'undefined') return;
+        // destroy existing
+        try { if (detailRadarChart) detailRadarChart.destroy(); } catch (e) {}
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
+        gradient.addColorStop(1, 'rgba(139, 92, 246, 0.2)');
+
+        detailRadarChart = new Chart(ctx, {
+            type: 'radar',
+            data: { labels, datasets: [{ label: 'Proficiency', data: values, backgroundColor: gradient, borderColor: '#6366f1', borderWidth: 2, pointBackgroundColor: '#6366f1', pointBorderColor: '#fff' }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { r: { beginAtZero: true, max: 100 } } }
+        });
+    };
+
+    const populateDetail = (companyId) => {
+        const d = experienceDetailData[companyId] || experienceDetailData['acutus'];
+        if (!d || !detailModal) return;
+        document.getElementById('detailCompanyLogo').src = d.logo;
+        document.getElementById('detailCompanyName').textContent = d.companyName;
+        document.getElementById('detailCompanyRole').textContent = d.role;
+        document.getElementById('detailDuration').textContent = d.duration;
+        document.getElementById('detailLocation').textContent = d.location;
+        document.getElementById('detailRoleDescription').textContent = d.description;
+
+        // metrics
+        document.getElementById('detailMetric1').textContent = d.metrics.metric1 || '';
+        document.getElementById('detailMetric2').textContent = d.metrics.metric2 || '';
+        document.getElementById('detailMetric3').textContent = d.metrics.metric3 || '';
+        document.getElementById('detailMetric4').textContent = d.metrics.metric4 || '';
+        // labels
+        document.getElementById('detailMetricLabel1').textContent = d.metricsLabels[0] || '';
+        document.getElementById('detailMetricLabel2').textContent = d.metricsLabels[1] || '';
+        document.getElementById('detailMetricLabel3').textContent = d.metricsLabels[2] || '';
+        document.getElementById('detailMetricLabel4').textContent = d.metricsLabels[3] || '';
+
+        // tech tags
+        const techContainer = document.getElementById('detailTechTags');
+        techContainer.innerHTML = '';
+        (d.techTags || []).forEach(t => { const sp = document.createElement('span'); sp.className = 'tech-tag'; sp.textContent = t; techContainer.appendChild(sp); });
+
+        // responsibilities
+        const respEl = document.getElementById('detailResponsibilities');
+        respEl.innerHTML = '';
+        (d.responsibilities || []).forEach(r => { const li = document.createElement('li'); li.textContent = r; respEl.appendChild(li); });
+
+        // achievements
+        const achRoot = document.getElementById('detailAchievements');
+        achRoot.innerHTML = '';
+        (d.achievements || []).forEach(a => {
+            const item = document.createElement('div'); item.className = 'achievement-item';
+            const icon = document.createElement('div'); icon.className = 'achievement-icon'; icon.textContent = '✓';
+            const txt = document.createElement('div'); txt.className = 'achievement-text'; txt.textContent = a;
+            item.appendChild(icon); item.appendChild(txt); achRoot.appendChild(item);
+        });
+
+        // radar
+        renderDetailRadar(d.radarData.labels, d.radarData.values);
+
+        // show modal
+        detailModal.classList.add('open');
+        detailModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeDetail = () => {
+        if (!detailModal) return;
+        detailModal.classList.remove('open');
+        detailModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        try { if (detailRadarChart) { detailRadarChart.destroy(); detailRadarChart = null; } } catch (e) {}
+    };
+
+    // wire up Explore controls
+    document.querySelectorAll('.explore-more').forEach(btn => {
+        btn.addEventListener('click', (ev) => {
+            const card = btn.closest('.company-card');
+            const company = card ? card.getAttribute('data-company') : null;
+            if (company) populateDetail(company);
+        });
+        btn.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); btn.click(); } });
+    });
+
+    // backdrop and close button
+    if (detailModal) {
+        const backdrop = detailModal.querySelector('[data-close]');
+        if (backdrop) backdrop.addEventListener('click', closeDetail);
+        const closeBtn = detailModal.querySelector('.detail-close');
+        if (closeBtn) closeBtn.addEventListener('click', closeDetail);
+        document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && detailModal.classList.contains('open')) closeDetail(); });
+    }
+
 });

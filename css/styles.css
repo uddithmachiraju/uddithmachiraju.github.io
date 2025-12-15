@@ -208,6 +208,17 @@ body {
     .company-right{ align-items:flex-start; }
 }
 
+/* Prevent anchor default underline for explore links and keep color consistent */
+a.explore-more, .explore-more {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.explore-arrow, .explore-text { display: inline-block; }
+
+/* Ensure explore links don't get underlined by parent link styles */
+.company-right a.explore-more { text-decoration: none; }
+
 .experience-left {
     flex: 1 1 65%;
 }
@@ -653,6 +664,30 @@ body {
     .container {
         padding: 80px 18px 18px;
     }
+}
+
+/* Experience detail modal (scoped) */
+.experience-detail-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:2000}
+.experience-detail-modal.open{display:flex}
+.experience-detail-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6)}
+.experience-detail-panel{position:relative;max-width:1200px;width:96%;background:transparent;border-radius:12px;z-index:2}
+.experience-detail-panel .detail-content{display:grid;grid-template-columns:420px 1fr;gap:24px}
+.experience-detail-panel .detail-left{background:linear-gradient(135deg,#2a2a2a,#171717);padding:24px;border-radius:12px;color:#fff}
+.experience-detail-panel .detail-right{background:#fff;padding:24px;border-radius:12px}
+.detail-close{position:absolute;right:8px;top:8px;background:rgba(255,255,255,0.9);border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+.detail-close:hover{transform:translateY(-2px)}
+.detail-section{margin-bottom:18px}
+.company-logo-large{width:72px;height:72px;border-radius:12px;background:#fff;padding:10px;object-fit:contain}
+.company-name-large{font-size:20px}
+.company-role-large{font-size:14px;color:rgba(255,255,255,0.8)}
+.radar-container-detail{height:220px;margin-top:12px}
+.detail-metrics .metric-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06)}
+.achievements-section{background:linear-gradient(135deg,#f8f9ff,#f0f1ff);padding:16px;border-radius:10px}
+
+@media (max-width: 900px){
+    .experience-detail-panel .detail-content{grid-template-columns:1fr}
+    .experience-detail-modal{align-items:flex-start;padding-top:80px}
+    .detail-close{right:12px}
 }
 
 /* Experience cards grid */
