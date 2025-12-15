@@ -859,6 +859,10 @@ body {
     gap: 24px;
 }
 
+.company-right { flex: 0 0 80px; text-align: right }
+.company-number { font-size: clamp(18px, 4vw, 36px); font-weight:800; color:#1a1a1a }
+.company-unit { font-size: 15px; font-weight:700; color:#666; margin-left:6px }
+
 .company-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.15) }
 
 .company-logo { width:64px; height:64px; border-radius:12px; object-fit:contain; flex-shrink:0; background:#f8f8f8; padding:8px }
@@ -903,7 +907,8 @@ body {
 @media (max-width: 640px) {
     .experience-container { margin: 20px auto; padding: 0 14px }
     .section-title { font-size: 32px; margin-bottom: 24px }
-    .company-card { padding: 20px 24px; gap: 16px }
+    .company-card { padding: 20px 24px; gap: 12px }
+    .company-right { flex: 0 0 64px }
     .company-logo { width:54px; height:54px }
     .metrics-card { padding: 24px }
     .skills-grid { grid-template-columns: 1fr }

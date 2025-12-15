@@ -282,6 +282,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 16);
     };
+
+    // Animate company-month badges (updates the inner `.company-number-value`)
+    const animateCompanyBadge = (el, duration = 1200) => {
+        const dataVal = el.getAttribute('data-value');
+        const target = dataVal ? (parseInt(dataVal.replace(/[^0-9]/g, ''), 10) || 0) : (parseInt(el.textContent.replace(/[^0-9]/g, ''), 10) || 0);
+        const valueSpan = el.querySelector('.company-number-value');
+        const start = 0;
+        const startTime = performance.now();
+
+        const step = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const current = Math.floor(progress * (target - start) + start);
+
+            if (valueSpan) {
+                valueSpan.textContent = current;
+            } else {
+                // fallback: replace text node while preserving unit span
+                const unit = el.querySelector('.company-unit');
+                if (unit) {
+                    el.textContent = current;
+                    el.appendChild(unit);
+                } else {
+                    el.textContent = current;
+                }
+            }
+
+            if (progress < 1) requestAnimationFrame(step);
+        };
+
+        requestAnimationFrame(step);
+    };
     
     // Trigger counter animations when elements are visible
     const observerOptions = {
@@ -317,6 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     else if (text.includes('+')) suffix = '+';
 
                     animateCounter(entry.target, targetValue, 0, suffix);
+                } else if (entry.target.classList.contains('company-number')) {
+                    const el = entry.target;
+                    animateCompanyBadge(el, 1000);
                 }
             }
         });
@@ -325,10 +359,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const statNumber = document.querySelector('.stat-number');
     const metricNumbers = document.querySelectorAll('.metric-number');
     const experienceNumber = document.querySelector('.experience-number');
+    const companyNumbers = document.querySelectorAll('.company-number');
     
     if (statNumber) observer.observe(statNumber);
     metricNumbers.forEach(metric => observer.observe(metric));
     if (experienceNumber) observer.observe(experienceNumber);
+    companyNumbers.forEach(cn => observer.observe(cn));
 
     // Typing effect for mission badge (optional enhancement)
     const missionBadge = document.querySelector('.mission-badge');
