@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: ['LLMs', 'MLOps', 'Backend', 'Cloud', 'Gen AI', 'Data Eng'],
                     datasets: [{
                         label: 'Skill Level',
-                        data: [95, 88, 92, 85, 90, 82],
+                        data: [95, 40, 92, 85, 90, 82],
                         backgroundColor: gradient,
                         borderColor: '#6366f1',
                         borderWidth: 3,
