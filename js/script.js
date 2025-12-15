@@ -605,9 +605,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // expose detail data for other pages (detail page will use this)
-    try { window.experienceDetailData = experienceDetailData; } catch (e) { /* ignore */ }
-
     const detailModal = document.getElementById('experienceDetailModal');
     let detailRadarChart = null;
 
