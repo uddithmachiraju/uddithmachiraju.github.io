@@ -143,6 +143,7 @@ body {
     color: #999;
     font-weight: 500;
     font-size: 18px; /* specific size for the lighter heading line */
+    margin-top: 8px; /* small gap between name and lighter heading */
 }
 
 .heading-bold {
@@ -903,9 +904,16 @@ a.explore-more, .explore-more {
 
 /* Styles for merged Experience section (from experience.html) */
 .experience-container {
+    /* Make the experience section span the full page width and
+       center its inner .card at the same max-width as the home area. */
+    width: 100%;
+    margin: 0;
+    padding: 120px 60px 60px;
+}
+
+.experience-container .card {
     max-width: 1400px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto;
 }
 
 .experience-grid {
@@ -1104,7 +1112,13 @@ html { scroll-padding-top: 90px; }
    Kept scoped and appended to avoid interfering with other rules.
    ====================================================================== */
 .projects-section {
+    /* Keep projects aligned with the same page width as the home section */
+    width: 100%;
     padding: 120px 60px 60px;
+}
+
+.projects-section > .section-header,
+.projects-section > .projects-grid {
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -1115,19 +1129,25 @@ html { scroll-padding-top: 90px; }
 .section-subtitle { font-size: 18px; color: #666; font-weight: 500; line-height: 1.6 }
 
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px }
-.project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative }
+.project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative; aspect-ratio: 3 / 4; }
 .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) }
-.project-icon-wrapper { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start }
+.project-icon-wrapper { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start }
 .project-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0 }
 .edit-btn { display: none !important; }
-.project-content { padding: 20px 24px 24px; flex: 1; display: flex; flex-direction: column }
-.project-title { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; line-height: 1.3 }
-.project-description { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px; flex: 1 }
-.project-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #f0f0f0 }
-.learn-more-btn { padding: 8px 20px; background: transparent; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; color: #1a1a1a; cursor: pointer; transition: all 0.2s ease }
+.project-content { padding: 16px 20px 20px; display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 96px); }
+.project-title { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.2 }
+.project-description { font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; }
+.project-footer { display: flex; justify-content: flex-end; align-items: center; padding-top: 12px; }
+.learn-more-btn { padding: 8px 16px; background: transparent; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; color: #1a1a1a; cursor: pointer; transition: all 0.16s ease }
 .learn-more-btn:hover { background: #f3f4f6 }
-.project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px }
-.project-tag { padding: 4px 10px; background: #f3f4f6; border-radius: 6px; font-size: 11px; font-weight: 600; color: #666 }
+.project-tags { display: none; }
+
+/* Responsive: let cards size naturally on small screens */
+@media (max-width: 640px) {
+    .project-card { height: auto; }
+    .project-content { height: auto; }
+    .project-description { -webkit-line-clamp: 6; }
+}
 .icon-blue { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) }
 .icon-gray { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) }
 .icon-green { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%) }
