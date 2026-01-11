@@ -314,7 +314,25 @@ a.explore-more, .explore-more {
 }
 
 .cgpa-card {
-    padding: 36px 32px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Education logo inside CGPA card */
+.cgpa-left { flex: 1 1 auto; }
+.cgpa-right { flex: 0 0 136px; display: flex; justify-content: center; }
+.edu-logo {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    display: block;
 }
 
 .stat-number {
@@ -407,6 +425,53 @@ a.explore-more, .explore-more {
     font-size: 13px;
     color: #666;
     font-weight: 600;
+}
+
+/* Small descriptive text under metric labels: hidden by default, shown on hover */
+.metric-item {
+    position: relative;
+}
+
+/* Tooltip-style description that appears outside the card */
+.metric-desc {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%) translateY(6px);
+    background: #ffffff;
+    color: #222;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    z-index: 1200;
+}
+
+/* Show tooltip when hovering the metric number specifically */
+.metric-number:hover ~ .metric-label .metric-desc,
+.metric-number:focus ~ .metric-label .metric-desc {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* Mobile: render descriptions inline to avoid tooltip overlap and ensure readability */
+@media (max-width: 640px) {
+    .metric-desc {
+        position: static;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+        box-shadow: none;
+        white-space: normal;
+        margin-left: 4px;
+        display: inline-block;
+    }
 }
 
 .availability {
@@ -620,6 +685,13 @@ a.explore-more, .explore-more {
 
     /* Make the experience card stack cleanly on small screens */
     .experience-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    /* Stack CGPA card on mobile so logo goes below text */
+    .cgpa-card {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
