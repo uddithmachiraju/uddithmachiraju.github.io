@@ -557,19 +557,18 @@ a.explore-more, .explore-more {
     color: white;
 }
 
-.contact-icon {
-    font-size: 18px;
-}
-
-.social-links {
+.contact-link {
     display: flex;
+    align-items: center;
     gap: 12px;
+    color: #fff; /* use white color for contact links */
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.18s ease;
 }
 
-.social-btn {
-    padding: 10px 24px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.contact-link:hover {
+    color: #fff;
     border-radius: 12px;
     color: white;
     text-decoration: none;
