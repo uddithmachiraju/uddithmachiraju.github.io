@@ -575,6 +575,31 @@
                     'Delivered a production-ready AI automation pipeline that significantly improved speed and scalability of content generation.'
                 ]
             },
+            'amtrino': {
+                companyName: 'Amtrino Technologies',
+                role: 'Software Engineer Intern',
+                logo: 'assets/Amtrino-Logo.png',
+                duration: 'Jan 2025 - May 2025 (1 months)',
+                location: 'Remote',
+                metrics: { metric1: '1M+' },
+                metricsLabels: ['Docs Processed'],
+                techTags: ['Azure OpenAI','RAG','Vector Store','Python','FastAPI','Docker'],
+                radarData: {
+                    labels: ['RAG','Backend','Cloud','Privacy','Scaling','APIs'],
+                    values: [95,90,85,88,92,90]
+                },
+                description: 'Designed and implemented a production-grade, modular multi-agent RAG chatbot handling 1M+ documents with robust ingestion pipelines for PDF, DOCX, PPTX, and CSV, and engineered a privacy-first in-memory vector store integrated with Azure OpenAI for low-latency retrieval.',
+                responsibilities: [
+                    'Designed and implemented a production-grade, modular multi-agent RAG chatbot handling 1M+ documents, with robust ingestion pipelines for PDF, DOCX, PPTX, and CSV formats.',
+                    'Engineered an in-memory vector store to support strict data privacy and legal compliance requirements (no disk persistence), and integrated Azure OpenAI GPT for low-latency semantic retrieval and answer generation.',
+                    'Shipped a production-ready backend with async processing, monitoring, security controls, and cloud deployment.'
+                ],
+                achievements: [
+                    'Deployed a RAG platform capable of handling 1M+ documents with low-latency retrieval.',
+                    'Implemented a compliance-focused in-memory vector store ensuring zero disk persistence.',
+                    'Delivered production backend with monitoring, security controls, and scalable cloud deployment.'
+                ]
+            },
             'aegion': {
                 companyName: 'Aegion Dynamic Solutions',
                 role: 'Machine Learning Intern',
@@ -652,17 +677,23 @@
         document.getElementById('location').textContent = data.location;
         document.getElementById('roleDescription').textContent = data.description;
 
-        // Update metrics
-        document.getElementById('metric1').textContent = data.metrics.metric1;
-        document.getElementById('metric2').textContent = data.metrics.metric2;
-        document.getElementById('metric3').textContent = data.metrics.metric3;
-        document.getElementById('metric4').textContent = data.metrics.metric4;
-        
-        // Update metric labels
-        document.getElementById('metricLabel1').textContent = data.metricsLabels[0];
-        document.getElementById('metricLabel2').textContent = data.metricsLabels[1];
-        document.getElementById('metricLabel3').textContent = data.metricsLabels[2];
-        document.getElementById('metricLabel4').textContent = data.metricsLabels[3];
+        // Update metrics (show only metrics that exist and hide others)
+        for (let i = 1; i <= 4; i++) {
+            const val = data.metrics['metric' + i];
+            const lbl = (data.metricsLabels && data.metricsLabels[i - 1]) ? data.metricsLabels[i - 1] : '';
+            const valEl = document.getElementById('metric' + i);
+            const lblEl = document.getElementById('metricLabel' + i);
+            const box = valEl ? valEl.closest('.metric-box') : null;
+            if (val) {
+                if (valEl) valEl.textContent = val;
+                if (lblEl) lblEl.textContent = lbl;
+                if (box) box.style.display = '';
+            } else {
+                if (valEl) valEl.textContent = '';
+                if (lblEl) lblEl.textContent = '';
+                if (box) box.style.display = 'none';
+            }
+        }
 
         // Update tech tags
         const techTagsContainer = document.getElementById('techTags');
@@ -702,6 +733,7 @@
         gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
         gradient.addColorStop(1, 'rgba(139, 92, 246, 0.2)');
 
+        const disableAnim = !!localStorage.getItem('site_animations_shown_v1');
         new Chart(radarCtx, {
             type: 'radar',
             data: {
@@ -769,7 +801,7 @@
                     }
                 },
                 animation: {
-                    duration: 1500,
+                    duration: disableAnim ? 0 : 1500,
                     easing: 'easeOutQuart'
                 }
             }

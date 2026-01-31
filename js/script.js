@@ -397,6 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
             gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
             gradient.addColorStop(1, 'rgba(139, 92, 246, 0.2)');
 
+            const disableAnim = !!localStorage.getItem('site_animations_shown_v1');
+
             new Chart(radarCtx, {
                 type: 'radar',
                 data: {
@@ -585,14 +587,23 @@ document.addEventListener('DOMContentLoaded', () => {
             responsibilities:[ 'Designed and implemented 8+ automated ML pipelines using MLflow and Apache Airflow', 'Developed predictive models achieving 92% accuracy for business forecasting', 'Built comprehensive data engineering workflows for ETL processes', 'Optimized model inference speed by 2× through efficient architecture design', 'Implemented monitoring and alerting systems for production ML models' ],
             achievements:[ 'Accelerated data analysis by 2× with optimized processing pipelines', 'Trained and deployed 15+ models across different business domains', 'Established MLOps best practices adopted across the organization' ]
         },
-        'kanaq': {
-            companyName: 'KanaQ Innovations', role: 'Python Developer Intern', logo: 'assets/KanaQ-Logo.png', duration: 'Jan 2025 - May 2025 (5 months)', location: 'Remote',
-            metrics:{ metric1:'20+', metric2:'100+', metric3:'12+', metric4:'500+' },
-            metricsLabels:['Scripts','Functions','APIs','Commits'], techTags:['Python','Flask','Django','MongoDB','Redis','Git'],
-            radarData:{ labels:['Python','Backend','Database','APIs','Testing','Automation'], values:[95,88,85,90,82,87] },
-            description:'As a Python Developer Intern at KanaQ Innovations, I focused on building robust backend systems and automation tools. I developed scalable APIs and worked on optimizing database operations for high-performance applications.',
-            responsibilities:[ 'Developed 12+ RESTful APIs using Flask and Django frameworks', 'Built automation scripts reducing manual operations by 60%', 'Implemented database optimization strategies improving query performance by 50%', 'Created comprehensive unit tests achieving 90% code coverage', 'Collaborated on code reviews and maintained best coding practices' ],
-            achievements:[ 'Wrote 500+ commits contributing to core product features', 'Developed 20+ reusable Python scripts for automation', 'Built 100+ functions with comprehensive documentation' ]
+        'amtrino': {
+            companyName: 'Amtrino Technologies', role: 'Software Engineer Intern', logo: 'assets/Amtrino-Logo.png', duration: 'Jan 2025 - Present (1 months)', location: 'Hyderabad, Telangana',
+            metrics: { metric1: '1M+' },
+            metricsLabels: ['Docs Processed'],
+            techTags: ['Azure OpenAI','RAG','Vector Store','Python','FastAPI','Docker'],
+            radarData: { labels: ['RAG','Backend','Cloud','Privacy','Scaling','APIs'], values: [95,90,85,88,92,90] },
+            description: 'Designed and implemented a production-grade, modular multi-agent RAG chatbot handling 1M+ documents with robust ingestion pipelines for PDF, DOCX, PPTX, and CSV, and engineered a privacy-first in-memory vector store integrated with Azure OpenAI for low-latency retrieval.',
+            responsibilities: [
+                'Designed and implemented a production-grade, modular multi-agent RAG chatbot handling 1M+ documents, with robust ingestion pipelines for PDF, DOCX, PPTX, and CSV formats.',
+                'Engineered an in-memory vector store to support strict data privacy and legal compliance requirements (no disk persistence), and integrated Azure OpenAI GPT for low-latency semantic retrieval and answer generation.',
+                'Shipped a production-ready backend with async processing, monitoring, security controls, and cloud deployment.'
+            ],
+            achievements: [
+                'Deployed a RAG platform capable of handling 1M+ documents with low-latency retrieval.',
+                'Implemented a compliance-focused in-memory vector store ensuring zero disk persistence.',
+                'Delivered production backend with monitoring, security controls, and scalable cloud deployment.'
+            ]
         },
         'iit': {
             companyName: 'IIT Indore', role: 'ML Research Intern', logo: 'assets/IITI_Logo.png', duration: 'Aug 2024 - Mar 2025 (8 months)', location: 'Indore, India',
